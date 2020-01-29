@@ -33,7 +33,7 @@ input {
 }
 /* Give the element with id 'special' a 2px solid blue border(pick your own rgb blue)*/
 #special {
-	border: 2px solid #4287f5;
+	border: 2px solid rgb(0, 90, 220);
 }
 /*Make all the <p>'s that are nested inside of divs 25px font(font-size: 25px)*/
 div p {
@@ -68,7 +68,7 @@ label {
 	text-transform: uppercase;
 }
 /*Make the first letter of the element with id 'special' green and 100px font size(font-size: 100)*/
-#special::first-letter {
+#special:first-letter {
 	color: green;
 	font-size: 100px;
 }
