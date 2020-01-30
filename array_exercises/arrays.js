@@ -43,9 +43,9 @@ function sumArray(numsArr) {
 function max(numsArr) {
 	let largestNum = numsArr[0];
 
-	for (let i = 0; i < numsArr.length; i++) {
-		if (numsArr[i] < numsArr[i + 1]) {
-			largestNum = numsArr[i + 1];
+	for (let i = 1; i < numsArr.length; i++) {
+		if (largestNum < numsArr[i]) {
+			largestNum = numsArr[i];
 		}
 	}
 	return largestNum;
