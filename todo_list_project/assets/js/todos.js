@@ -1,10 +1,10 @@
 // Check off specific Todos by clicking
-$('li').on('click', function() {
+$('ul').on('click', 'li', function() {
 	$(this).toggleClass('completed');
 });
 
 //Click on X to delete To Do
-$('span').on('click', function(event) {
+$('ul').on('click', 'span', function(event) {
 	$(this).parent().fadeOut(250, function() {
 		$(this).remove();
 	}); // fades out the parent that 'this' is contained in and then removes it
@@ -16,6 +16,11 @@ $('input[type="text"]').keypress(function(event) {
 	if (event.which === 13) {
 		//grabs text from user input
 		let todoText = $(this).val();
-		$('ul').append(`<li>${todoText}</li>`);
+		$(this).val('');
+		$('ul').append(`<li><span><i class='fas fa-trash-alt'></i></span> ${todoText}</li>`);
 	}
+});
+
+$('.fa-plus').click(function() {
+	$('input[type="text"]').fadeToggle(250);
 });
