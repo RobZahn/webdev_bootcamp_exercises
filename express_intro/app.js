@@ -14,7 +14,16 @@ app.get('/bye', function(req, res) {
 
 app.get('/dog', function(req, res) {
 	console.log('Someone made a get request to /dog.');
-	res.send('MEOW ^_^');
+	res.send('MEOW');
+});
+
+app.get('/r/:subredditName', function(req, res) {
+	const subreddit = req.params.subredditName;
+	res.send(`Welcome to the ${subreddit.toUpperCase()} Subreddit!`);
+});
+
+app.get('*', function(req, res) {
+	res.send('You are a star');
 });
 
 app.listen(3000, function() {
