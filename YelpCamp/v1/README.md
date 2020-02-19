@@ -18,5 +18,9 @@
 * ~~Add basic unstyled form~~
 
 ## Style the campgrounds page
-* Add a better header/title
-* Make campgrounds display in a grid
+* ~~Add a better header/title~~
+* ~~Make campgrounds display in a grid~~
+
+## Style the navbar and form
+* Add navbar to all templates
+* Style the new campground form
