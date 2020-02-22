@@ -12,39 +12,58 @@ mongoose
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
-const campgrounds = [
-	{
-		name: 'Salmon Creek',
-		image: 'https://pixabay.com/get/50e9d4474856b108f5d084609620367d1c3ed9e04e507441772c79d6954ac5_340.jpg'
-	},
+//Schema Setup
 
-	{
-		name: 'Granite Hill',
-		image: 'https://pixabay.com/get/54e5dc474355a914f6da8c7dda793f7f1636dfe2564c704c7d2d78d6954fc258_340.jpg'
-	},
+const campgroundSchema = new mongoose.Schema({
+	name: String,
+	image: String
+});
 
-	{
-		name: "Mountain Goat's Rest",
-		image: 'https://pixabay.com/get/57e8d0424a5bae14f6da8c7dda793f7f1636dfe2564c704c7d2d78d6954fc258_340.jpg'
-	}
-];
+const Campground = mongoose.model('Campground', campgroundSchema);
+
+// Campground.create(
+// 	{
+// 		name: 'Granite Hill',
+// 		image: 'https://pixabay.com/get/54e5dc474355a914f6da8c7dda793f7f1636dfe2564c704c7d2d78d6954fc258_340.jpg'
+// 	},
+// 	function(err, campground) {
+// 		if (err) {
+// 			console.log(err);
+// 		} else {
+// 			console.log('Created New Campground');
+// 			console.log(campground);
+// 		}
+// 	}
+// );
 
 app.get('/', function(req, res) {
 	res.render('landing');
 });
 
 app.get('/campgrounds', function(req, res) {
-	res.render('campgrounds', { campgrounds: campgrounds });
+	// res.render('campgrounds', { campgrounds: campgrounds });
+	//Get all campgrounds from db and render
+	Campground.find({}, function(err, allCampgrounds) {
+		if (err) {
+			console.log(err);
+		} else {
+			res.render('campgrounds', { campgrounds: allCampgrounds });
+		}
+	});
 });
 
 app.post('/campgrounds', function(req, res) {
 	const name = req.body.name;
 	const image = req.body.image;
 	const newCampground = { name: name, image: image };
-	campgrounds.push(newCampground);
-	res.redirect('/campgrounds');
-	//get data from form and add to campgrounds array
-	//redirect back to campgrounds page
+	// Create new campground and save to DB
+	Campground.create(newCampground, function(err, newlyCreated) {
+		if (err) {
+			console.log(`Something went wrong: ${err}`);
+		} else {
+			res.redirect('/campgrounds');
+		}
+	});
 });
 
 app.get('/campgrounds/new', function(req, res) {
