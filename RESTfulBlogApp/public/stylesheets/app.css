@@ -5,3 +5,7 @@
 i.icon {
 	font-size: 2.2em;
 }
+
+#delete {
+	display: inline;
+}
